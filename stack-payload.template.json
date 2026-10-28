@@ -1,0 +1,39 @@
+{
+  "slug": "vd-cnb-stack-e2e",
+  "components": [
+    {
+      "name": "database",
+      "kind": "database",
+      "db_image": "postgres:17-alpine",
+      "volume_name": "pgdata",
+      "replica": 1,
+      "build_mode": "auto"
+    },
+    {
+      "name": "back",
+      "kind": "back",
+      "repo_url": "REMPLACER_PAR_URL_DEPOT_GIT",
+      "branch": "main",
+      "source_subdirectory": "backend",
+      "replica": 1,
+      "port": 8000,
+      "expose_publicly": true,
+      "build_mode": "buildpack",
+      "envs_var": {}
+    },
+    {
+      "name": "front",
+      "kind": "front",
+      "repo_url": "REMPLACER_PAR_URL_DEPOT_GIT",
+      "branch": "main",
+      "source_subdirectory": "frontend",
+      "replica": 1,
+      "port": 8080,
+      "expose_publicly": true,
+      "build_mode": "buildpack",
+      "envs_var": {
+        "BP_NODE_RUN_SCRIPTS": "build"
+      }
+    }
+  ]
+}
